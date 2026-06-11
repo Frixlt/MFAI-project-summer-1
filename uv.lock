@@ -73,20 +73,7 @@ wheels = [
 ]
 
 [[package]]
-name = "python-discovery"
-version = "1.4.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "filelock" },
-    { name = "platformdirs" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/06/35/2b595d9ba7c72015f474fe2dfc4165f2ac24ef9e756d6ca8d68d5dab4c8f/python_discovery-1.4.1.tar.gz", hash = "sha256:890b190209d8dba27d5c01e70ccfe3d8747e19297ffcb89ac6d4a8ed39b0c722", size = 69615, upload-time = "2026-06-11T14:51:59.978Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/13/32/6b8675a962a4330cb1b0aad02087ee8f93a3ef4c34ebcc752d743e6685ef/python_discovery-1.4.1-py3-none-any.whl", hash = "sha256:c973545d56f95a92fa74aafbf3a5794c49baa7a00b46a04c66f25cf9bb20004f", size = 33572, upload-time = "2026-06-11T14:51:58.803Z" },
-]
-
-[[package]]
-name = "python-linter-base"
+name = "project-summer-1"
 version = "0.0.1"
 source = { virtual = "." }
 
@@ -102,6 +89,19 @@ requires-dist = [
     { name = "ruff", marker = "extra == 'lint'", specifier = ">=0.11" },
 ]
 provides-extras = ["lint"]
+
+[[package]]
+name = "python-discovery"
+version = "1.4.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "filelock" },
+    { name = "platformdirs" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/06/35/2b595d9ba7c72015f474fe2dfc4165f2ac24ef9e756d6ca8d68d5dab4c8f/python_discovery-1.4.1.tar.gz", hash = "sha256:890b190209d8dba27d5c01e70ccfe3d8747e19297ffcb89ac6d4a8ed39b0c722", size = 69615, upload-time = "2026-06-11T14:51:59.978Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/13/32/6b8675a962a4330cb1b0aad02087ee8f93a3ef4c34ebcc752d743e6685ef/python_discovery-1.4.1-py3-none-any.whl", hash = "sha256:c973545d56f95a92fa74aafbf3a5794c49baa7a00b46a04c66f25cf9bb20004f", size = 33572, upload-time = "2026-06-11T14:51:58.803Z" },
+]
 
 [[package]]
 name = "pyyaml"

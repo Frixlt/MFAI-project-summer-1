@@ -5,6 +5,7 @@ description = "Постквантовый обмен ключами и гибр�
 readme = "README.md"
 license = { file = "LICENSE.md" }
 requires-python = ">=3.14"
+authors = [{ name = "Максим Бердников", email = "m.berdnikov@innopolis.university" }]
 dependencies = []
 
 [project.optional-dependencies]

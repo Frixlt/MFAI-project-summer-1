@@ -1,0 +1,68 @@
+[project]
+name = "Project-summer-1"
+version = "0.0.1"
+description = "Постквантовый обмен ключами и гибридное шифрование"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+requires-python = ">=3.14"
+authors = [{ name = "Максим Бердников", email = "m.berdnikov@innopolis.university" }]
+dependencies = []
+
+[project.optional-dependencies]
+lint = [
+    "ruff>=0.11",
+    "pre-commit>=4.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".git",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",      # pycodestyle
+    "F",            # pyflakes
+    "I",            # isort
+    "N",            # pep8-naming
+    "B",            # bugbear
+    "A",            # builtins
+    "C4",           # comprehensions
+    "T20",          # print
+    "RET",          # return
+    "PTH",          # pathlib
+    "ERA",          # eradicate
+    "COM",          # commas
+    "Q",            # quotes
+    "UP",           # pyupgrade
+    "SIM",          # simplify
+    "TCH",          # type-checking
+    "PERF",         # performance
+    "FURB",         # refurb
+    "LOG",          # logging
+    "DTZ",          # datetime timezone
+]
+ignore = [
+    "COM812",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]
+"scripts/*" = ["T201"]
+
+[tool.ruff.lint.isort]
+known-first-party = [] 
+force-sort-within-sections = true
+combine-as-imports = true
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "double"
+
+[tool.ruff.format]
+quote-style = "double"

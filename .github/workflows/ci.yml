@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main, chore/base-setup ]
+    branches: [main, chore/base-setup]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read
@@ -34,10 +34,6 @@ jobs:
         run: |
           uv sync --all-extras
 
-      - name: Run linter (Ruff)
+      - name: Run all style and formatting checks (pre-commit)
         run: |
-          make lint
-
-      - name: Run formatter check (Ruff)
-        run: |
-          uv run ruff format --check .
+          uv run pre-commit run --all-files

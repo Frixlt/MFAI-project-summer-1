@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.debugpy",
+    "meta.pyrefly",
+    "charliermarsh.ruff",
+    "tamasfe.even-better-toml",
+    "ms-vscode.makefile-tools",
+    "gruntfuggly.todo-tree",
+    "yzhang.markdown-all-in-one",
+    "esbenp.prettier-vscode",
+    "codezombiech.gitignore",
+    "ms-toolsai.jupyter",
+    "cschleiden.vscode-github-actions"
+  ]
+}

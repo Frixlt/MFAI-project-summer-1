@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   lint:
@@ -43,6 +43,8 @@ jobs:
     name: Tests
     runs-on: ubuntu-latest
     needs: lint
+    outputs:
+      badge_changed: ${{ steps.badge.outputs.changed }}
 
     steps:
       - name: Checkout repository
@@ -70,21 +72,51 @@ jobs:
           uv run pytest
 
       - name: Generate coverage badge
-        id: badge
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           OLD=$(cat .github/badges/coverage.svg 2>/dev/null || echo "")
           uv run python3 .github/scripts/generate_badge.py -o .github/badges/coverage.svg -f
           NEW=$(cat .github/badges/coverage.svg)
           if [ "$OLD" != "$NEW" ]; then
+            cp .github/badges/coverage.svg /tmp/coverage.svg
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
+        id: badge
+
+      - name: Upload badge artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.badge.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-badge
+          path: /tmp/coverage.svg
+          retention-days: 1
+
+  badge:
+    name: Commit Coverage Badge
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.test.outputs.badge_changed == 'true'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Download badge artifact
+        id: download
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-badge
+          path: /tmp/badge
+        continue-on-error: true
 
       - name: Commit coverage badge
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.badge.outputs.changed == 'true'
+        if: steps.download.outcome == 'success'
         run: |
+          cp /tmp/badge/coverage.svg .github/badges/coverage.svg
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .github/badges/coverage.svg

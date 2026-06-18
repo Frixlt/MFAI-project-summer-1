@@ -1,4 +1,4 @@
-__all__ = ("main",)
+__all__ = ["main"]
 
 
 def main() -> None:

@@ -15,6 +15,11 @@ repos:
         args: [--fix]
       - id: ruff-format
 
+  - repo: https://github.com/python-formate/flake8-dunder-all
+    rev: v0.5.0
+    hooks:
+      - id: ensure-dunder-all
+
   - repo: https://github.com/ComPWA/taplo-pre-commit
     rev: v0.9.3
     hooks:

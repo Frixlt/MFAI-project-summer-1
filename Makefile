@@ -29,6 +29,7 @@ clean: ## Очистить кэш-файлы и временные директ�
 	rm -rf .ipynb_checkpoints/
 	rm -rf .coverage
 	rm -rf coverage.xml
+	rm -rf coverage.json
 	find . -type d -name "__pycache__" -exec rm -r {} +
 
 help: ## Показать это справочное сообщение

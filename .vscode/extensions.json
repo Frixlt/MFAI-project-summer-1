@@ -10,6 +10,7 @@
     "yzhang.markdown-all-in-one",
     "esbenp.prettier-vscode",
     "codezombiech.gitignore",
-    "ms-toolsai.jupyter"
+    "ms-toolsai.jupyter",
+    "cschleiden.vscode-github-actions"
   ]
 }

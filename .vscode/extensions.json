@@ -9,6 +9,7 @@
     "gruntfuggly.todo-tree",
     "yzhang.markdown-all-in-one",
     "esbenp.prettier-vscode",
-    "codezombiech.gitignore"
+    "codezombiech.gitignore",
+    "ms-toolsai.jupyter"
   ]
 }

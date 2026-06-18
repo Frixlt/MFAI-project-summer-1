@@ -76,5 +76,7 @@ uv run pre-commit install
 - `make install` — создать виртуальное окружение и установить зависимости.
 - `make lint` — проверить код линтером Ruff.
 - `make format` — автоматически исправить ошибки стиля и отформатировать код.
+- `make test` — запустить юнит-тесты с расчётом покрытия кода.
+- `make cov-badge` — сгенерировать бейдж покрытия кода (Coverage Badge).
 - `make pre-commit-run` — принудительно запустить pre-commit хуки на всех файлах.
 - `make clean` — очистить временные файлы, кэш Ruff/pytest и Jupyter checkpoints.

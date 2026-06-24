@@ -1,6 +1,6 @@
 import numpy
 
-__all__ = ["gf2_add", "gf2_mul"]
+__all__ = ["gf2_add", "gf2_inv", "gf2_mul"]
 
 
 def gf2_add(a: numpy.ndarray, b: numpy.ndarray) -> numpy.ndarray:
@@ -21,4 +21,26 @@ def gf2_mul(a: numpy.ndarray, b: numpy.ndarray) -> numpy.ndarray:
     return numpy.mod(a @ b, 2)
 
 
-# TODO: Сделать расчет обратной матрицы над GF(2) (gf2_inv).
+def gf2_inv(matrix: numpy.ndarray) -> numpy.ndarray | None:
+    """
+    Вычислить обратную матрицу над GF(2) методом Гаусса-Жордана.
+    Возвращает матрицу или None, если матрица вырождена.
+    """
+    a = numpy.asarray(matrix, dtype=numpy.int8) % 2
+    if a.ndim != 2 or a.shape[0] != a.shape[1]:
+        raise ValueError("Матрица должна быть двумерной и квадратной.")
+    n = a.shape[0]
+    identity = numpy.eye(n, dtype=numpy.int8)
+    aug = numpy.block([a, identity])
+    for i in range(n):
+        pivot_row = i
+        while pivot_row < n and aug[pivot_row, i] == 0:
+            pivot_row += 1
+        if pivot_row == n:
+            return None
+        if pivot_row != i:
+            aug[[i, pivot_row]] = aug[[pivot_row, i]]
+        for j in range(n):
+            if j != i and aug[j, i] == 1:
+                aug[j] = aug[j] ^ aug[i]
+    return aug[:, n:]

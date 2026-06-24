@@ -21,10 +21,10 @@ def gf2_mul(a: numpy.ndarray, b: numpy.ndarray) -> numpy.ndarray:
     return numpy.mod(a @ b, 2)
 
 
-def gf2_inv(matrix: numpy.ndarray) -> numpy.ndarray | None:
+def gf2_inv(matrix: numpy.ndarray) -> numpy.ndarray:
     """
     Вычислить обратную матрицу над GF(2) методом Гаусса-Жордана.
-    Возвращает матрицу или None, если матрица вырождена.
+    Возвращает матрицу или выбрасывает ValueError, если матрица вырождена.
     """
     a = numpy.asarray(matrix, dtype=numpy.int8) % 2
     if a.ndim != 2 or a.shape[0] != a.shape[1]:
@@ -37,7 +37,7 @@ def gf2_inv(matrix: numpy.ndarray) -> numpy.ndarray | None:
         while pivot_row < n and aug[pivot_row, i] == 0:
             pivot_row += 1
         if pivot_row == n:
-            return None
+            raise ValueError("Матрица вырождена (необратима).")
         if pivot_row != i:
             aug[[i, pivot_row]] = aug[[pivot_row, i]]
         for j in range(n):

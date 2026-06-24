@@ -156,4 +156,55 @@ class TestGf2Mul:
             src.gf2.gf2_mul(a, b)
 
 
-# TODO: Добавить тесты для gf2_inv, когда функция будет реализована.
+class TestGf2Inv:
+    "Тесты вычисления обратной матрицы над GF(2)"
+
+    def test_inv_identity_matrix_i2(self) -> None:
+        """Обратная к единичной матрице 2x2 — она сама."""
+        matrix = numpy.array([[1, 0], [0, 1]], dtype=numpy.int8)
+        expected = numpy.array([[1, 0], [0, 1]], dtype=numpy.int8)
+        assert numpy.array_equal(src.gf2.gf2_inv(matrix), expected)
+
+    def test_inv_upper_triangular_matrix(self) -> None:
+        """Вычисление обратной для верхнетреугольной матрицы 2x2."""
+        matrix = numpy.array([[1, 1], [0, 1]], dtype=numpy.int8)
+        expected = numpy.array([[1, 1], [0, 1]], dtype=numpy.int8)
+        assert numpy.array_equal(src.gf2.gf2_inv(matrix), expected)
+
+    def test_inv_dense_matrix_3x3(self) -> None:
+        """Вычисление обратной для плотной матрицы 3x3 общего вида."""
+        matrix = numpy.array([[1, 1, 0], [1, 0, 1], [0, 1, 0]], dtype=numpy.int8)
+        expected = numpy.array([[1, 0, 1], [0, 0, 1], [1, 1, 1]], dtype=numpy.int8)
+        assert numpy.array_equal(src.gf2.gf2_inv(matrix), expected)
+
+    def test_inv_zero_matrix_raises_error(self) -> None:
+        """Нулевая матрица не имеет обратной матрицы."""
+        matrix = numpy.array([[0, 0], [0, 0]], dtype=numpy.int8)
+        with pytest.raises(ValueError, match="Матрица вырождена"):
+            src.gf2.gf2_inv(matrix)
+
+    def test_inv_linearly_dependent_rows_raises_error(self) -> None:
+        """Линейно зависимые строки делают матрицу необратимой."""
+        matrix = numpy.array([[1, 1], [1, 1]], dtype=numpy.int8)
+        with pytest.raises(ValueError, match="Матрица вырождена"):
+            src.gf2.gf2_inv(matrix)
+
+    def test_inv_zero_row_raises_error(self) -> None:
+        """Наличие нулевой строки делает матрицу необратимой."""
+        matrix = numpy.array([[1, 1, 1], [0, 0, 0], [1, 0, 1]], dtype=numpy.int8)
+        with pytest.raises(ValueError, match="Матрица вырождена"):
+            src.gf2.gf2_inv(matrix)
+
+    def test_property_inv_a_mul_a_equals_identity(self) -> None:
+        """Свойство: A * A^-1 должно давать единичную матрицу I."""
+        matrix = numpy.array([[1, 1, 0], [0, 1, 1], [1, 1, 1]], dtype=numpy.int8)
+        matrix_inv = src.gf2.gf2_inv(matrix)
+        identity_check = src.gf2.gf2_mul(matrix, matrix_inv)
+        expected_identity = numpy.eye(3, dtype=numpy.int8)
+        assert numpy.array_equal(identity_check, expected_identity)
+
+    def test_non_square_matrix_raises_error(self) -> None:
+        """Передача неквадратной матрицы должна вызывать ValueError."""
+        invalid_matrix = numpy.array([[1, 1, 0], [0, 1, 1]], dtype=numpy.int8)  # 2x3
+        with pytest.raises(ValueError, match="Матрица должна быть двумерной и квадратной"):
+            src.gf2.gf2_inv(invalid_matrix)

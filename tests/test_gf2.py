@@ -6,6 +6,7 @@ import src.gf2
 __all__ = ()
 
 
+# TODO: часть тестов оформить через параметризацию для сокращения дублирования.
 class TestGf2Add:
     "Тесты сложения над GF(2)"
 
@@ -153,3 +154,6 @@ class TestGf2Mul:
         b = numpy.ones((2, 3))
         with pytest.raises(ValueError):
             src.gf2.gf2_mul(a, b)
+
+
+# TODO: Добавить тесты для gf2_inv, когда функция будет реализована.

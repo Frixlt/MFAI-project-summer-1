@@ -19,3 +19,6 @@ def gf2_mul(a: numpy.ndarray, b: numpy.ndarray) -> numpy.ndarray:
     a = numpy.asarray(a, dtype=numpy.int8)
     b = numpy.asarray(b, dtype=numpy.int8)
     return numpy.mod(a @ b, 2)
+
+
+# TODO: Сделать расчет обратной матрицы над GF(2) (gf2_inv).

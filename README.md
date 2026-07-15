@@ -18,10 +18,6 @@
 - [Техническое задание](docs/task.md)
 - [Инструкция по установке и запуску](docs/installation.md)
 - [Руководство по стилю кода и коммитам](docs/codestyle.md)
-
-## Быстрый запуск
-
-```bash
-uv run src/main.py
-make lint
-```
+- [Поле GF(2) — аксиомы, арифметика, векторные пространства, шары Хэмминга](docs/theory/GF2.md)
+- [Код Хэмминга [7,4,3] и схема Мак-Элиса — полный разбор](docs/theory/theory.md)
+- [Jupyter Notebook — полная реализация с демонстрацией](notebooks/report.ipynb)

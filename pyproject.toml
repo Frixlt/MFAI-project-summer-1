@@ -8,7 +8,8 @@ requires-python = ">=3.14"
 authors = [
   { name = "Максим Бердников", email = "m.berdnikov@innopolis.university" },
 ]
-dependencies = []
+dependencies = ["numpy>=2.5.0"]
+
 
 [project.optional-dependencies]
 lint = ["ruff>=0.11", "pre-commit>=4.0"]
@@ -50,6 +51,7 @@ ignore = ["COM812"]
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101"]
 "scripts/*" = ["T201"]
+"*.ipynb" = ["RUF001", "RUF002", "RUF003", "T201", "E501", "I001"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["src"]

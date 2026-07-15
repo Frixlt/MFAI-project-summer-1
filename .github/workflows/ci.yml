@@ -1,7 +1,8 @@
 name: CI
-
 on:
-  push: # запускать на любом push, в любую ветку
+  push:
+    branches: [main, chore/base-setup]
+
   pull_request:
     branches: [main]
 
